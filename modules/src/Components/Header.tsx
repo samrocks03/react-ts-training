@@ -1,7 +1,6 @@
 // Components/Header.tsx
-import React from 'react';
 
-const Header: React.FC = () => {
+const Header = () => {
   return <nav>Todo Tracker</nav>;
 };
 

@@ -11,14 +11,14 @@ interface TaskProps {
   index: number;
 }
 
-const Task: React.FC<TaskProps> = ({
+const Task = ({
   title,
   description,
   completed,
   deleteTask,
   toggleComplete,
   index,
-}) => {
+}: TaskProps) => {
   return (
     <div className={`task ${completed ? "completed" : ""}`}>
       <div>

@@ -1,19 +1,21 @@
 // Components/Home.tsx
-import React, { useEffect, useState, FormEvent } from "react";
+import  { useEffect, useState, FormEvent } from "react";
 import Task from "./Task";
 
-const Home: React.FC = () => {
-  const initialArray: {
-    title: string;
-    description: string;
-    completed: boolean;
-  }[] = JSON.parse(localStorage.getItem("tasks") || "[]");
+interface Todo{
+  title: string;
+  description: string;
+  completed: boolean;
+}
 
-  const [tasks, setTasks] = useState(initialArray);
+const Home = () => {
+  const initialArray:Todo[] = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [tasks, setTasks] = useState<Todo[]>(initialArray);
+  const [title, setTitle] = useState<string>("");
+  
+  const [description, setDescription] = useState<string>("");
+  const [showCompleted, setShowCompleted] = useState<boolean>(false);
 
   // ------------------ submit Handler ------------------
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
