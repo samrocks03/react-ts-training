@@ -1,7 +1,8 @@
 // Components/Home.tsx
-import { useEffect, useState, FormEvent } from "react";
+import { /*useEffect,*/ useState, FormEvent, useEffect } from "react";
 import Task from "./Task";
 import { v4 as uuidv4 } from "uuid";
+import { useFetch } from "../Hooks/UseFetch";
 
 export interface Todo {
   id: string;
@@ -11,12 +12,8 @@ export interface Todo {
 }
 
 const Home = () => {
-  const initialArray: Todo[] = JSON.parse(
-    localStorage.getItem("tasks") || "[]"
-  );
-
-  // const [id,setId] = useState<number>(0);
-  const [tasks, setTasks] = useState<Todo[]>(initialArray);
+  const { loading, error, data } = useFetch();
+  const [tasks, setTasks] = useState<Todo[]>(data);
   const [title, setTitle] = useState<string>("");
 
   const [description, setDescription] = useState<string>("");
@@ -42,11 +39,6 @@ const Home = () => {
   const deleteTask = (id: string) => {
     const filteredTasks = tasks.filter((task) => task.id !== id);
     setTasks(filteredTasks);
-    // const filteredArr = tasks.filter((_val, i) => {
-    //   you need _val, otherwise it'd throw u error that, their is un-intentional comparison in it
-    //   return i !== index;
-    // });
-    // setTasks(filteredArr);
   };
 
   // ----------------------------- Toggle Check ----------------------------
@@ -56,15 +48,11 @@ const Home = () => {
       task.id === id ? { ...task, completed: checked } : task
     );
     setTasks(updatedTasks);
-    // const updatedTasks = [...tasks];
-    // updatedTasks[index].completed = !updatedTasks[index].completed;
-    // setTasks(updatedTasks);
   };
 
-  // ----------------------------- Setting in Local Storage ----------------------------
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  useEffect(()=>{
+    setTasks(data);
+  },[data])
 
   // ----------------------------- Filter completed tasks ------------------------------
   const filteredTasks = showCompleted
@@ -96,14 +84,22 @@ const Home = () => {
         {showCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button>
 
-      {filteredTasks.map((task) => (
-        <Task
-          key={task.id}
-          taskData={task}
-          deleteTask={deleteTask}
-          toggleComplete={toggleComplete}
-        />
-      ))}
+      {
+        loading ? (
+          <p>Loading...</p>    
+        ) : error? (
+          <p>{error}</p>
+        ) : (          
+          filteredTasks.map((task) => (
+            <Task
+              key={task.id}
+              taskData={task}
+              deleteTask={deleteTask}
+              toggleComplete={toggleComplete}
+            />
+          ))          
+        )
+      }
     </div>
   );
 };
