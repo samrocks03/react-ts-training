@@ -35,8 +35,8 @@ const Home = () => {
   };
   
   // ---------------------------- Delete Task ----------------------------
-  const deleteTask = (index: string) => {
-    const filteredTasks = tasks.filter(task => task.id !== index);
+  const deleteTask = (id: string) => {
+    const filteredTasks = tasks.filter(task => task.id !== id);
     setTasks(filteredTasks);    
     // const filteredArr = tasks.filter((_val, i) => {
     //   you need _val, otherwise it'd throw u error that, their is un-intentional comparison in it
@@ -46,10 +46,10 @@ const Home = () => {
   };
 
   // ----------------------------- Toggle Check ----------------------------
-  const toggleComplete = (index: string,checked:boolean) => {
+  const toggleComplete = (id: string,checked:boolean) => {
     // console.log(index);
     const updatedTasks = tasks.map(task =>
-      task.id === index ? { ...task, completed:checked } : task
+      task.id === id ? { ...task, completed:checked } : task
     );
     setTasks(updatedTasks);    
     // const updatedTasks = [...tasks];
@@ -93,9 +93,9 @@ const Home = () => {
         {showCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button>
 
-      {filteredTasks.map((task, index) => (
+      {filteredTasks.map((task) => (
         <Task
-          key={index}
+          key={task.id}
           taskData={task}
           deleteTask={deleteTask}
           toggleComplete={toggleComplete}
