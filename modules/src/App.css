@@ -77,7 +77,8 @@ button {
 }
 
 .completed-text {
-  text-decoration: line-through blue;
+  /* text-decoration: line-through blue; */
   font-weight: bold;
-  color: firebrick;
+  font-size: large;
+  color: green;
 }

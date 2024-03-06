@@ -1,24 +1,15 @@
 // Components/Task.tsx
 import React from "react";
+import { Todo } from "./Home";
 
 interface TaskProps {
-  title: string;
-  description: string;
-  deleteTask: (index: number) => void;
-  completed: boolean;
-
-  toggleComplete: (index: number) => void;
-  index: number;
+  taskData:Todo
+  deleteTask: (id: string) => void;
+  toggleComplete: (id: string,checked:boolean) => void;
 }
 
-const Task = ({
-  title,
-  description,
-  completed,
-  deleteTask,
-  toggleComplete,
-  index,
-}: TaskProps) => {
+const Task = ({taskData,deleteTask,toggleComplete}: TaskProps) => {
+  const {completed,description,title,id} = taskData
   return (
     <div className={`task ${completed ? "completed" : ""}`}>
       <div>
@@ -29,10 +20,13 @@ const Task = ({
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => toggleComplete(index)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          toggleComplete(id,e.target.checked)
+          console.log(e.target.checked);
+        }}
       />
 
-      <button onClick={() => deleteTask(index)}> - </button>
+      <button onClick={() => deleteTask(id)}> - </button>
     </div>
   );
 };
