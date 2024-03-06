@@ -44,19 +44,16 @@ const Home: React.FC = () => {
     setTasks(updatedTasks);
   };
 
-
   // ----------------------------- Setting in Local Storage ----------------------------
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-
 
   // ----------------------------- Filter completed tasks ------------------------------
   const filteredTasks = showCompleted
     ? tasks.filter((task) => task.completed)
     : tasks;
 
-    
   return (
     <div className="container">
       <h1>TODO's</h1>
