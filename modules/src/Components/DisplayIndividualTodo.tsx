@@ -1,5 +1,7 @@
+// Components/DisplayIndividualTodo.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { API_ENDPOINT } from "../constants";
 
 const DisplayIndividualTodo = () => {
   const param = useParams();
@@ -11,7 +13,7 @@ const DisplayIndividualTodo = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:5000/todos/${param.id}`);
+      const response = await fetch(`${API_ENDPOINT}${param.id}`);
 
       if (!response.ok) {
         throw new Error("Something went wrong");

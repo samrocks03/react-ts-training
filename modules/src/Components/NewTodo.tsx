@@ -3,16 +3,18 @@ import { FormEvent, useState } from "react";
 
 import "../App.css";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINT } from "../constants";
 
 const NewTodo = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  
   const navigate = useNavigate();
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await fetch("http://localhost:5000/todos", {
+      await fetch(`${API_ENDPOINT}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({title, description, completed: false }),

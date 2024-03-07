@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// Components/Home.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NewTodo from "./NewTodo";
 import Header from "./Header";
