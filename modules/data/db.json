@@ -46,7 +46,7 @@
       "id": "8b2a",
       "title": "This is new task",
       "description": "asfdjkfsdkj",
-      "completed": false
+      "completed": true
     }
   ]
 }

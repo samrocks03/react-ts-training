@@ -6,7 +6,8 @@ const DisplayIndividualTodo = () => {
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [completed, setCompleted] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, setCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +32,6 @@ const DisplayIndividualTodo = () => {
     <div>
       <h1>{title}</h1>
       <p>{description}</p>
-      <p>{completed ? "Completed ✅" : "Not Completed ❌"}</p>
     </div>
   );
 };
