@@ -43,7 +43,6 @@ const Home = () => {
 
   // ----------------------------- Toggle Check ----------------------------
   const toggleComplete = (id: string, checked: boolean) => {
-    // console.log(index);
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: checked } : task
     );

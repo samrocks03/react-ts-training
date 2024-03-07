@@ -1,8 +1,10 @@
+//Hooks/UseFetch.tsx
+
 import { useEffect, useState } from "react";
 import { Todo } from "../Components/Home";
 
 export const useFetch = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>(""); // Explicitly define the type as string
   const [data, setData] = useState<Todo[]>([]);
 
