@@ -1,52 +1,52 @@
 {
-    "todos": [
-        {
-            "id": "1",
-            "title": "Complete React project",
-            "description": "Finish the React project by implementing all the required features.",
-            "completed": false
-        },
-        {
-            "id": "2",
-            "title": "Study for exam",
-            "description": "Study for the upcoming exam on React programming.",
-            "completed": false
-        },
-        {
-            "id": "3",
-            "title": "Exercise",
-            "description": "Go for a jog in the park.",
-            "completed": true
-        },
-        {
-            "id": "4",
-            "title": "Buy groceries",
-            "description": "Buy milk, eggs, bread, and fruits from the supermarket.",
-            "completed": false
-        },
-        {
-            "id": "5",
-            "title": "Call mom",
-            "description": "Call mom to wish her a happy birthday.",
-            "completed": true
-        },
-        {
-            "id": "6",
-            "title": "Attend meeting",
-            "description": "Attend the weekly team meeting at 10 AM.",
-            "completed": false
-        },
-        {
-            "id": "7",
-            "title": "Read book",
-            "description": "Read the new novel you bought last week.",
-            "completed": false
-        },
-        {
-            "id": "8",
-            "title": "Write report",
-            "description": "Write a report on the project progress for the manager.",
-            "completed": true
-        }
-    ]
+  "todos": [
+    {
+      "id": "2",
+      "title": "Study for exam",
+      "description": "Study for the upcoming exam on React programming.",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "Exercise",
+      "description": "Go for a jog in the park.",
+      "completed": true
+    },
+    {
+      "id": "4",
+      "title": "Buy groceries",
+      "description": "Buy milk, eggs, bread, and fruits from the supermarket.",
+      "completed": false
+    },
+    {
+      "id": "5",
+      "title": "Call mom",
+      "description": "Call mom to wish her a happy birthday.",
+      "completed": true
+    },
+    {
+      "id": "6",
+      "title": "Attend meeting",
+      "description": "Attend the weekly team meeting at 10 AM.",
+      "completed": false
+    },
+    {
+      "id": "7",
+      "title": "Read book",
+      "description": "Read the new novel you bought last week.",
+      "completed": false
+    },
+    {
+      "id": "8",
+      "title": "Write report",
+      "description": "Write a report on the project progress for the manager.",
+      "completed": true
+    },
+    {
+      "id": "8b2a",
+      "title": "This is new task",
+      "description": "asfdjkfsdkj",
+      "completed": false
+    }
+  ]
 }
