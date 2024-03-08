@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
 nav {
   background-color: darkblue;
   color: white;
@@ -62,10 +61,11 @@ button {
 
 .task {
   display: flex;
-  background-color: lightblue;
+  background-color: #add8e6;
   padding: 10px;
-  margin: 20px 0;
+  margin: 20px 10%;
   align-items: center;
+  border-radius: 25px;
   /* justify-content: center; */
 }
 
@@ -90,15 +90,23 @@ button {
 
 .completed-text {
   /* text-decoration: line-through blue; */
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  font-size: large;
+  font-size: larger;
   color: green;
 }
-
 
 .divBro{
   /* display: flex; */
   /* justify-content: space-between; */
   /* align-items: center; */
+
+
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-size: larger;
   margin: 20px;
+  border-radius: 20px;
+  background-color: #6ca4b8;
 }

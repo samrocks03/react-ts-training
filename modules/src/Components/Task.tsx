@@ -15,7 +15,6 @@ const Task = ({ taskData, deleteTask, toggleComplete }: TaskProps) => {
   return (
     <div className={`task ${completed ? "completed" : ""}`}>
       <div
-        
         className="divBro"
         onClick={() => {
           navigate(`/display/${id}`);
