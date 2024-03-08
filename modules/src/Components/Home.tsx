@@ -6,6 +6,7 @@ import DisplayTodo from "./DisplayTodo";
 import DisplayIndividualTodo from "./DisplayIndividualTodo";
 
 export interface Todo {
+  date: string;
   id: string;
   title: string;
   description: string;
