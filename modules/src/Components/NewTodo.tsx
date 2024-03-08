@@ -65,7 +65,7 @@ const NewTodo = () => {
           required
         ></textarea>
 
-        <div  className="d-flex mb-3 justify-content-end">
+        <div className="d-flex mb-3 justify-content-end">
           <input
             type="date"
             className="w-25 d-flex justify-content-center form-control  "
