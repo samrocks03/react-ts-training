@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_ENDPOINT } from "../constants";
 
+
+// fetch and display a specific todo item based on an ID passed in URL parameters
 const DisplayIndividualTodo = () => {
   const param = useParams();
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, setCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${API_ENDPOINT}${param.id}`);
+      const response = await fetch(`${API_ENDPOINT}/${param.id}`);
 
       if (!response.ok) {
         throw new Error("Something went wrong");
@@ -23,10 +24,10 @@ const DisplayIndividualTodo = () => {
       setDescription(data.description);
       setCompleted(data.completed);
 
-      console.log(data.title);
-      console.log(data.description);
-      console.log(data.completed);
-    };
+      // console.log(data.title);
+      // console.log(data.description);
+      // console.log(data.completed);
+    }
 
     fetchData();
   }, [param.id]);

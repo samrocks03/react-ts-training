@@ -8,7 +8,7 @@ import { API_ENDPOINT } from "../constants";
 const NewTodo = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  
+
   const navigate = useNavigate();
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -17,7 +17,7 @@ const NewTodo = () => {
       await fetch(`${API_ENDPOINT}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({title, description, completed: false }),
+        body: JSON.stringify({ title, description, completed: false }),
       }).then(() => navigate("/"));
     } catch (error) {
       console.log(error);

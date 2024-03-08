@@ -7,7 +7,7 @@ import Task from "./Task";
 import { API_ENDPOINT } from "../constants";
 
 const DisplayTodo = () => {
-  const [showCompleted, setShowCompleted] = useState<boolean>(false);
+  const [isCompleted, setisCompleted] = useState<boolean>(false);
   const { loading, error, data } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
 
@@ -41,14 +41,14 @@ const DisplayTodo = () => {
   };
 
   // ----------------------------- Filter completed tasks ------------------
-  const filteredTasks = showCompleted
+  const filteredTasks = isCompleted
     ? tasks.filter((task) => task.completed)
     : tasks;
 
   return (
     <div>
-      <button onClick={() => setShowCompleted(!showCompleted)}>
-        {showCompleted ? "All  Tasks" : "Show Completed Tasks"}
+      <button onClick={() => setisCompleted(!isCompleted)}>
+        {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button>
 
       {loading ? (

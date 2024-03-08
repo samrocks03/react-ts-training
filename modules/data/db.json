@@ -1,6 +1,12 @@
 {
   "todos": [
     {
+      "id": "1",
+      "title": "Complete React project",
+      "description": "Finish the React project by implementing all the required features.",
+      "completed": false
+    },
+    {
       "id": "2",
       "title": "Study for exam",
       "description": "Study for the upcoming exam on React programming.",
@@ -40,12 +46,6 @@
       "id": "8",
       "title": "Write report",
       "description": "Write a report on the project progress for the manager.",
-      "completed": true
-    },
-    {
-      "id": "8b2a",
-      "title": "This is new task",
-      "description": "asfdjkfsdkj",
       "completed": true
     }
   ]

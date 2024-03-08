@@ -18,7 +18,6 @@ const Home = () => {
       <Router>
         <Header />
         <Routes>
-          {/* <Route path=''/> */}
           <Route path='/' element={<DisplayTodo/>} />
           <Route path='/add' element={<NewTodo/>} />
           <Route path='display/:id' element={<DisplayIndividualTodo/>}/>
