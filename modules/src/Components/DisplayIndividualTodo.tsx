@@ -21,7 +21,7 @@ const DisplayIndividualTodo = () => {
       setDescription(data.description);
       setCompleted(data.completed);
 
-      console.log(data.title);
+      // console.log(data.title);
       console.log(data.description);
       console.log(data.completed);
     };
