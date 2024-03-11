@@ -22,7 +22,6 @@ const Task = ({taskData,deleteTask,toggleComplete}: TaskProps) => {
         checked={completed}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           toggleComplete(id,e.target.checked)
-          console.log(e.target.checked);
         }}
       />
 
