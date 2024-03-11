@@ -47,7 +47,7 @@ const DisplayTodo = () => {
 
   return (
     <div>
-      <button onClick={() => setisCompleted(!isCompleted)}>
+      <button className="rounded" onClick={() => setisCompleted(!isCompleted)}>
         {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button>
 
