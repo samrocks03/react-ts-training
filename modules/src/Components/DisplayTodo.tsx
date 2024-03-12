@@ -2,27 +2,33 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../Hooks/UseFetch";
 import { Todo } from "./Home";
+
 import Task from "./Task";
 
 import { API_ENDPOINT } from "../constants";
+import TodoFilterBar from "./FilterBar/FilterBar";
 
 const DisplayTodo = () => {
   const [isCompleted, setisCompleted] = useState<boolean>(false);
   const { loading, error, data } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    setTasks(data);
+    if(data){
+      setTasks(data);
+    }
   }, [data]);
 
   // ---------------------------- Delete Task ----------------------------
-  const deleteTask = async(id: string) => {
+  const deleteTask = async (id: string) => {
     const filteredTasks = tasks.filter((task) => task.id !== id);
     setTasks(filteredTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
   };
 
@@ -35,21 +41,66 @@ const DisplayTodo = () => {
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ completed: checked }),
     });
   };
 
+  const onSearchChange = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  const onSortChange = (order: "asc" | "desc") => {
+    setSortOrder(order);
+  };
+
+  const onStatusChange = () => {
+    setisCompleted(!isCompleted);
+  };  
+
+  // const filteredTasks = tasks
+  //   .filter((task) =>
+  //     task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   )
+  //   .filter((task) => (isCompleted ? task.completed : true))
+  //   .sort((a, b) => (sortOrder === "asc" ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date)));
+
+  const filteredTasks = tasks
+  .filter((task) =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  .filter((task) => (isCompleted ? task.completed : true))
+  .sort((a, b) => {
+    const dateA = a.date || ""; // Use an empty string if date is undefined
+    const dateB = b.date || ""; // Use an empty string if date is undefined
+
+    return sortOrder === "asc" ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
+  });
+
+
   // ----------------------------- Filter completed tasks ------------------
-  const filteredTasks = isCompleted
-    ? tasks.filter((task) => task.completed)
-    : tasks;
+  // const filteredTasks = isCompleted
+  //   ? tasks.filter((task) => task.completed)
+  //   : tasks;
+
+  // const notCompletedTasks = !isCompleted
+  //   ? tasks.filter((task) => !task.completed)
+  //   : tasks;
 
   return (
     <div>
-      <button className="rounded" onClick={() => setisCompleted(!isCompleted)}>
+      <TodoFilterBar
+        searchTerm={searchTerm}
+        onSearchChange={onSearchChange}
+        sortOrder={sortOrder}
+        onSortChange={onSortChange}
+        isCompleted={isCompleted}
+        onStatusChange={onStatusChange}
+      />
+
+      {/* <button className="rounded" onClick={() => setisCompleted(!isCompleted)}>
         {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
-      </button>
+      </button> */}
 
       {loading ? (
         <p>Loading...</p>
@@ -70,3 +121,16 @@ const DisplayTodo = () => {
 };
 
 export default DisplayTodo;
+
+
+/*
+1. Make a list view for UI
+  - in that, take Title, it must redirect to the next page to show description,
+/all
+
+3. Check-box should be a bit bigger
+
+4. Add delete icon / delete char instead of '-' icon
+
+5. try to align it to left, rather than
+*/
