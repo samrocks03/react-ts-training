@@ -47,20 +47,6 @@
       "title": "Write report",
       "description": "Write a report on the project progress for the manager.",
       "completed": true
-    },
-    {
-      "id": "cd5dbdaf-c1ef-4026-beb9-51f757da8719",
-      "title": "This is new task",
-      "description": "THis is very new task",
-      "date": "2023-03-12",
-      "completed": false
-    },
-    {
-      "id": "be3e18b7-7fa9-418d-8809-d8e628ef5ec9",
-      "title": "Bru cha title",
-      "description": "Bru cha description",
-      "date": "2024-03-08",
-      "completed": true
     }
   ]
 }

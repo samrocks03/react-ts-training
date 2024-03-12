@@ -8,22 +8,24 @@ import { API_ENDPOINT } from "../constants";
 
 const DisplayTodo = () => {
   const [isCompleted, setisCompleted] = useState<boolean>(false);
-  const { loading, error, data } = useFetch();
+  const { loading, error, data, refetchData } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
 
   useEffect(() => {
-    setTasks(data);
+    if (data) {
+      setTasks(data);
+    }
   }, [data]);
 
   // ---------------------------- Delete Task ----------------------------
-  const deleteTask = async(id: string) => {
+  const deleteTask = async (id: string) => {
     const filteredTasks = tasks.filter((task) => task.id !== id);
     setTasks(filteredTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    });
+      headers: { "Content-Type": "application/json" },
+    }).then(() => refetchData());
   };
 
   // ----------------------------- Toggle Check ----------------------------
@@ -35,9 +37,9 @@ const DisplayTodo = () => {
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ completed: checked }),
-    });
+    }).then(() => refetchData());
   };
 
   // ----------------------------- Filter completed tasks ------------------
