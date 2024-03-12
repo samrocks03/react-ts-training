@@ -8,10 +8,8 @@ interface TodoFilterBarProps {
   sortOrder: "asc" | "desc";
   onSortChange: (order: "asc" | "desc") => void;
   // onSortChange: (order: sortOrder) => void; // this won't work
-  isCompleted: boolean;
-  onStatusChange: () => void;
-  
-  
+  isCompleted: string;
+  onStatusChange: (checked:string) => void;
 }
 
 const TodoFilterBar = ({
@@ -37,14 +35,16 @@ const TodoFilterBar = ({
         <option value="asc">Sort by Date (Ascending)</option>
         <option value="desc">Sort by Date (Descending)</option>
       </select>
-      <label>
-        <input
-          type="checkbox"
-          checked={isCompleted}
-          onChange={onStatusChange}
-        />
-        Show Completed Tasks
-      </label>
+
+        <select
+          value={isCompleted}
+          onChange={(e) => onStatusChange(e.target.value)}
+        >
+          <option value="all"> All(All)</option>
+          <option value="true"> Completed </option>
+          <option value="false"> Incomplete</option>
+        </select>
+   
     </div>
   );
 };

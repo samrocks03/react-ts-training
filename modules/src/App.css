@@ -105,9 +105,11 @@ button {
 
 
   font-optical-sizing: auto;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: larger;
   margin: 20px;
   border-radius: 20px;
   background-color:  #6ca4b8;
+  text-align: left;
+  padding: 10px;
 }

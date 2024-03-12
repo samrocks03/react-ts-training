@@ -1,40 +1,11 @@
 {
   "todos": [
     {
-      "id": "1",
-      "title": "Complete React project",
-      "description": "Finish the React project by implementing all the required features.",
-      "date": "2023-03-11",
-      "completed": false
-    },
-    {
-      "id": "2",
-      "title": "Study for exam",
-      "description": "Study for the upcoming exam on React programming.",
-      "date": "2023-03-09",
-      "completed": true
-    },
-    {
-      "id": "3",
-      "title": "Exercise",
-      "description": "Go for a jog in the park.",
-      "date": "2023-03-13",
-      "completed": true
-    },
-    {
-      "id": "4",
-      "title": "Buy groceries",
-      "description": "Buy milk, eggs, bread, and fruits from the supermarket.",
-      "date": "2023-03-14",
-      "completed": false
-    },
-    {
       "id": "5",
       "title": "Call mom",
       "description": "Call mom to wish her a happy birthday.",
       "date": "2023-03-15",
       "completed": true
-      
     },
     {
       "id": "6",
@@ -56,13 +27,6 @@
       "description": "Write a report on the project progress for the manager.",
       "date": "2023-03-05",
       "completed": true
-    },
-    {
-      "id": "cd5dbdaf-c1ef-4026-beb9-51f757da8719",
-      "title": "This is new task",
-      "description": "THis is very new task",
-      "date": "2023-03-12",
-      "completed": false
     },
     {
       "id": "be3e18b7-7fa9-418d-8809-d8e628ef5ec9",

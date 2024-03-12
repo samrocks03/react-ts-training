@@ -9,7 +9,7 @@ import { API_ENDPOINT } from "../constants";
 import TodoFilterBar from "./FilterBar/FilterBar";
 
 const DisplayTodo = () => {
-  const [isCompleted, setisCompleted] = useState<boolean>(false);
+  const [isCompleted, setisCompleted] = useState<string>('all');
   const { loading, error, data } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -54,8 +54,9 @@ const DisplayTodo = () => {
     setSortOrder(order);
   };
 
-  const onStatusChange = () => {
-    setisCompleted(!isCompleted);
+  const onStatusChange = (checked:string) => {
+    console.log(checked)
+    setisCompleted(checked);
   };  
 
   // const filteredTasks = tasks
@@ -64,12 +65,12 @@ const DisplayTodo = () => {
   //   )
   //   .filter((task) => (isCompleted ? task.completed : true))
   //   .sort((a, b) => (sortOrder === "asc" ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date)));
+  console.log("tasks",tasks)
 
   const filteredTasks = tasks
   .filter((task) =>
     task.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
-  .filter((task) => (isCompleted ? task.completed : true))
   .sort((a, b) => {
     const dateA = a.date || ""; // Use an empty string if date is undefined
     const dateB = b.date || ""; // Use an empty string if date is undefined
@@ -77,6 +78,10 @@ const DisplayTodo = () => {
     return sortOrder === "asc" ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
   });
 
+  console.log("filteredTasks",filteredTasks)
+
+  const dataFilteredByIsComplte = isCompleted === 'all' ? filteredTasks : filteredTasks.filter((task) => String(task.completed) === isCompleted);
+console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
 
   // ----------------------------- Filter completed tasks ------------------
   // const filteredTasks = isCompleted
@@ -86,6 +91,14 @@ const DisplayTodo = () => {
   // const notCompletedTasks = !isCompleted
   //   ? tasks.filter((task) => !task.completed)
   //   : tasks;
+
+  if(loading){
+    return  <p>Loading..</p>
+  }
+
+  if(error){
+    return <p>{error}</p>
+  }
 
   return (
     <div>
@@ -102,12 +115,8 @@ const DisplayTodo = () => {
         {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button> */}
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        filteredTasks.map((task) => (
+      {
+        dataFilteredByIsComplte.map((task) => (
           <Task
             key={task.id}
             taskData={task}
@@ -115,7 +124,7 @@ const DisplayTodo = () => {
             toggleComplete={toggleComplete}
           />
         ))
-      )}
+      }
     </div>
   );
 };
