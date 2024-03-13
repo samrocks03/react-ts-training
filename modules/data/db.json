@@ -19,7 +19,7 @@
       "title": "Read book",
       "description": "Read the new novel you bought last week.",
       "date": "2023-03-14",
-      "completed": false
+      "completed": true
     },
     {
       "id": "8",
