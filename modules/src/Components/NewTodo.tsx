@@ -7,6 +7,13 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../constants";
 import "bootstrap/dist/css/bootstrap.css";
 import { v4 as uuidv4 } from "uuid";
+import * as yup from "yup";
+
+const validationRules = yup.object().shape({
+  title: yup.string().required("Title is required"),
+  description: yup.string().required("Description is required"),
+  date: yup.date().required("Date is required"),
+});
 
 const NewTodo = () => {
   const navigate = useNavigate();
@@ -55,24 +62,23 @@ const NewTodo = () => {
 
   return (
     <div className="container">
-      <h1>TODO's</h1>
+      <h1>ADD Todos</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => handleSubmit(values, navigate)}
+        validationSchema={validationRules}
       >
         <Form>
-          <Field type="text" name="title" placeholder="Title" required />
-          <ErrorMessage 
-              name="title"
-              // {titleError => <p>{titleError}</p>}
-              component="div" />
+          <Field type="text" name="title" placeholder="Title"  />
+          <ErrorMessage name="title" component="div" />
 
           <Field
             as="textarea"
             name="description"
             placeholder="Description"
-            required
+            
           />
+
 
           <ErrorMessage name="description" component="div" />
 
@@ -83,8 +89,10 @@ const NewTodo = () => {
               id="dateField"
               name="date"
               min={getCurrentDate()}
-              required
-            />
+              
+              />
+
+          <ErrorMessage name="date" component="div" />
 
             <button className="container-button" type="submit">
               Add
@@ -97,3 +105,14 @@ const NewTodo = () => {
 };
 
 export default NewTodo;
+
+
+/**
+ * 
+ * 1. redirect link for "Title"
+ * 2. Remove the dark blue color
+ * 3. Refactor the Add todos page such that
+ *    - the error messsage must appear exactly below the input field and towards left side (aligned)
+ *    - Adjust date and add button (space-between property)
+ * 4. 
+ */
