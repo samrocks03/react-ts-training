@@ -59,12 +59,7 @@ const DisplayTodo = () => {
     setisCompleted(checked);
   };  
 
-  // const filteredTasks = tasks
-  //   .filter((task) =>
-  //     task.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //   )
-  //   .filter((task) => (isCompleted ? task.completed : true))
-  //   .sort((a, b) => (sortOrder === "asc" ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date)));
+
   console.log("tasks",tasks)
 
   const filteredTasks = tasks
@@ -83,14 +78,7 @@ const DisplayTodo = () => {
   const dataFilteredByIsComplte = isCompleted === 'all' ? filteredTasks : filteredTasks.filter((task) => String(task.completed) === isCompleted);
 console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
 
-  // ----------------------------- Filter completed tasks ------------------
-  // const filteredTasks = isCompleted
-  //   ? tasks.filter((task) => task.completed)
-  //   : tasks;
 
-  // const notCompletedTasks = !isCompleted
-  //   ? tasks.filter((task) => !task.completed)
-  //   : tasks;
 
   if(loading){
     return  <p>Loading..</p>
@@ -131,15 +119,3 @@ console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
 
 export default DisplayTodo;
 
-
-/*
-1. Make a list view for UI
-  - in that, take Title, it must redirect to the next page to show description,
-/all
-
-3. Check-box should be a bit bigger
-
-4. Add delete icon / delete char instead of '-' icon
-
-5. try to align it to left, rather than
-*/

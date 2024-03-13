@@ -1,21 +1,26 @@
 // Components/NewTodo.tsx
-import { FormEvent, useState } from "react";
+// import { FormEvent, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import "../App.css";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../constants";
 import "bootstrap/dist/css/bootstrap.css";
 import { v4 as uuidv4 } from "uuid";
 
 const NewTodo = () => {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<string>();
-
   const navigate = useNavigate();
 
-  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
+  type ValuesType = {
+    title: string;
+    description: string;
+    date: string;
+  };
+
+  const initialValues: ValuesType = {
+    title: "",
+    description: "",
+    date: "",
   };
 
   const getCurrentDate = () => {
@@ -26,20 +31,23 @@ const NewTodo = () => {
     return `${year}-${month}-${day}`;
   };
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    values: ValuesType,
+    navigate: NavigateFunction
+  ) => {
     try {
-      e.preventDefault();
       await fetch(`${API_ENDPOINT}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: uuidv4(),
-          title,
-          description,
-          date,
+          title: values.title,
+          description: values.description,
+          date: values.date,
           completed: false,
         }),
-      }).then(() => navigate("/"));
+      });
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -48,38 +56,42 @@ const NewTodo = () => {
   return (
     <div className="container">
       <h1>TODO's</h1>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => handleSubmit(values, navigate)}
+      >
+        <Form>
+          <Field type="text" name="title" placeholder="Title" required />
+          <ErrorMessage 
+              name="title"
+              // {titleError => <p>{titleError}</p>}
+              component="div" />
 
-      <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        ></textarea>
-
-        <div className="d-flex mb-3 justify-content-end">
-          <input
-            type="date"
-            className="w-25 d-flex justify-content-center form-control  "
-            id="dateField"
-            min={getCurrentDate()}
-            onChange={(e) => handleChangeDate(e)}
+          <Field
+            as="textarea"
+            name="description"
+            placeholder="Description"
             required
           />
 
-          <button className="container-button" type="submit">
-            Add
-          </button>
-        </div>
-      </form>
+          <ErrorMessage name="description" component="div" />
+
+          <div className="d-flex mb-3 justify-content-end">
+            <Field
+              type="date"
+              className="w-25 d-flex justify-content-center form-control"
+              id="dateField"
+              name="date"
+              min={getCurrentDate()}
+              required
+            />
+
+            <button className="container-button" type="submit">
+              Add
+            </button>
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 };
