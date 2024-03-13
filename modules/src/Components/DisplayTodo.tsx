@@ -19,8 +19,8 @@ const DisplayTodo = () => {
 
   // ---------------------------- Delete Task ----------------------------
   const deleteTask = async (id: string) => {
-    const filteredTasks = tasks.filter((task) => task.id !== id);
-    setTasks(filteredTasks);
+    // const filteredTasks = tasks.filter((task) => task.id !== id);
+    // setTasks(filteredTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "DELETE",
@@ -30,10 +30,10 @@ const DisplayTodo = () => {
 
   // ----------------------------- Toggle Check ----------------------------
   const toggleComplete = async (id: string, checked: boolean) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: checked } : task
-    );
-    setTasks(updatedTasks);
+    // const updatedTasks = tasks.map((task) =>
+    //   task.id === id ? { ...task, completed: checked } : task
+    // );
+    // setTasks(updatedTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "PATCH",
