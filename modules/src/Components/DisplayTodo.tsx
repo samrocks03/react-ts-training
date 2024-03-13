@@ -10,7 +10,7 @@ import TodoFilterBar from "./FilterBar/FilterBar";
 
 const DisplayTodo = () => {
   const [isCompleted, setisCompleted] = useState<string>('all');
-  const { loading, error, data } = useFetch();
+  const { loading, error, data, refetchData } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -23,27 +23,27 @@ const DisplayTodo = () => {
 
   // ---------------------------- Delete Task ----------------------------
   const deleteTask = async (id: string) => {
-    const filteredTasks = tasks.filter((task) => task.id !== id);
-    setTasks(filteredTasks);
+    // const filteredTasks = tasks.filter((task) => task.id !== id);
+    // setTasks(filteredTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-    });
+    }).then(() => refetchData());
   };
 
   // ----------------------------- Toggle Check ----------------------------
   const toggleComplete = async (id: string, checked: boolean) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: checked } : task
-    );
-    setTasks(updatedTasks);
+    // const updatedTasks = tasks.map((task) =>
+    //   task.id === id ? { ...task, completed: checked } : task
+    // );
+    // setTasks(updatedTasks);
 
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ completed: checked }),
-    });
+    }).then(() => refetchData());
   };
 
   const onSearchChange = (value: string) => {
