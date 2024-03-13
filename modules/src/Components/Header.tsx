@@ -7,7 +7,7 @@ const Header = () => {
     <nav>
       Todo Tracker
       <Link className="link" to="/">Home</Link>
-      <Link className="link" to="/add"> Add a Todo</Link>
+      <Link className="link" to="/add"> Add Todo</Link>
       <Link className="link" to="/addtodo/:id"></Link>
     </nav>
   );

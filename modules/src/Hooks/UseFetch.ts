@@ -7,6 +7,11 @@ export const useFetch = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>(""); // Explicitly define the type as string
   const [data, setData] = useState<Todo[]>([]);
+  const [refetch, setRefetch] = useState<boolean>(false);
+
+  const refetchData = () => {
+    setRefetch(true);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +22,7 @@ export const useFetch = () => {
         }
         const jsonData = await response.json();
         setData(jsonData);
+        setRefetch(false);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -27,6 +33,6 @@ export const useFetch = () => {
       }
     };
     fetchData();
-  }, []);
-  return { loading, error, data };
+  }, [refetch]);
+  return { loading, error, data, refetchData };
 };

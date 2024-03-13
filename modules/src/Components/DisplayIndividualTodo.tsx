@@ -1,17 +1,20 @@
+// Components/DisplayIndividualTodo.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { API_ENDPOINT } from "../constants";
 
+// fetch and display a specific todo item based on an ID passed in URL parameters
 const DisplayIndividualTodo = () => {
   const param = useParams();
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, setCompleted] = useState<boolean>(false);
+  const [date, setDate] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:5000/todos/${param.id}`);
+      const response = await fetch(`${API_ENDPOINT}/${param.id}`);
 
       if (!response.ok) {
         throw new Error("Something went wrong");
@@ -20,6 +23,7 @@ const DisplayIndividualTodo = () => {
       setTitle(data.title);
       setDescription(data.description);
       setCompleted(data.completed);
+      setDate(data.date);
 
       // console.log(data.title);
       // console.log(data.description);
@@ -32,6 +36,7 @@ const DisplayIndividualTodo = () => {
     <div>
       <h1>{title}</h1>
       <p>{description}</p>
+      <p>{date}</p>
     </div>
   );
 };

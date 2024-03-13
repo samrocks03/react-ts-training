@@ -1,18 +1,25 @@
 // Components/Task.tsx
 import React from "react";
 import { Todo } from "./Home";
+import { useNavigate } from "react-router-dom";
 
 interface TaskProps {
-  taskData:Todo
+  taskData: Todo;
   deleteTask: (id: string) => void;
-  toggleComplete: (id: string,checked:boolean) => void;
+  toggleComplete: (id: string, checked: boolean) => void;
 }
 
-const Task = ({taskData,deleteTask,toggleComplete}: TaskProps) => {
-  const {completed,description,title,id} = taskData
+const Task = ({ taskData, deleteTask, toggleComplete }: TaskProps) => {
+  const navigate = useNavigate();
+  const { completed, description, title, id } = taskData;
   return (
     <div className={`task ${completed ? "completed" : ""}`}>
-      <div>
+      <div
+        className="divBro"
+        onClick={() => {
+          navigate(`/display/${id}`);
+        }}
+      >
         <p className={completed ? "completed-text" : ""}>{title}</p>
         <span className={completed ? "completed-text" : ""}>{description}</span>
       </div>
@@ -21,7 +28,7 @@ const Task = ({taskData,deleteTask,toggleComplete}: TaskProps) => {
         type="checkbox"
         checked={completed}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          toggleComplete(id,e.target.checked)
+          toggleComplete(id, e.target.checked);
         }}
       />
 

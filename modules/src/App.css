@@ -39,7 +39,7 @@ nav {
 
 .container > form > input,
 textarea,
-button {
+button, .container-button {
   padding: 20px;
   border: 1px solid rgb(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -62,10 +62,11 @@ button {
 
 .task {
   display: flex;
-  background-color: lightblue;
+  background-color: #add8e6;
   padding: 10px;
-  margin: 20px 0;
+  margin: 20px 10%;
   align-items: center;
+  border-radius: 25px;
   /* justify-content: center; */
 }
 
@@ -90,7 +91,23 @@ button {
 
 .completed-text {
   /* text-decoration: line-through blue; */
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  font-size: large;
+  font-size: larger;
   color: green;
+}
+
+.divBro{
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+
+
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-size: larger;
+  margin: 20px;
+  border-radius: 20px;
+  background-color:  #6ca4b8;
 }
