@@ -61,7 +61,7 @@ const NewTodo = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container w-70">
       <h1>ADD Todos</h1>
       <Formik
         initialValues={initialValues}
@@ -69,32 +69,33 @@ const NewTodo = () => {
         validationSchema={validationRules}
       >
         <Form>
-          <Field type="text" name="title" placeholder="Title"  />
-          <ErrorMessage name="title" component="div" />
-
-          <Field
-            as="textarea"
-            name="description"
-            placeholder="Description"
-            
+          <Field type="text" name="title" placeholder="Title" />
+          <ErrorMessage
+            className="margin margin-bro d-flex align-items-left"
+            name="title"
+            component="div"
           />
 
+          <Field as="textarea" name="description" placeholder="Description" />
+          <ErrorMessage
+            className="margin  d-flex align-items-left"
+            name="description"
+            component="div"
+          />
 
-          <ErrorMessage name="description" component="div" />
-
-          <div className="d-flex mb-3 justify-content-end">
-            <Field
-              type="date"
-              className="w-25 d-flex justify-content-center form-control"
-              id="dateField"
-              name="date"
-              min={getCurrentDate()}
-              
+          <div className="d-flex mb-3 justify-content-between">
+            <div className="d-flex flex-column justify-content-start  w-30">
+              <Field
+                type="date"
+                className="mt-4 form-control"
+                id="dateField"
+                name="date"
+                min={getCurrentDate()}
               />
+              <ErrorMessage name="date" className="text-start bg-danger" />
+            </div>
 
-          <ErrorMessage name="date" component="div" />
-
-            <button className="container-button" type="submit">
+            <button className="btn btn-primary mt-4" type="submit">
               Add
             </button>
           </div>
@@ -106,13 +107,12 @@ const NewTodo = () => {
 
 export default NewTodo;
 
-
 /**
- * 
+ *
  * 1. redirect link for "Title"
  * 2. Remove the dark blue color
  * 3. Refactor the Add todos page such that
  *    - the error messsage must appear exactly below the input field and towards left side (aligned)
  *    - Adjust date and add button (space-between property)
- * 4. 
+ * 4.
  */

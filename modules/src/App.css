@@ -90,7 +90,6 @@ button {
 }
 
 .completed-text {
-  /* text-decoration: line-through blue; */
   align-items: center;
   justify-content: center;
   font-weight: bold;
@@ -99,17 +98,20 @@ button {
 }
 
 .divBro{
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-
-
   font-optical-sizing: auto;
   /* font-weight: bold; */
   font-size: larger;
   margin: 20px;
   border-radius: 20px;
-  background-color:  #6ca4b8;
+  /* background-color:  #6ca4b8; */
   text-align: left;
   padding: 10px;
+}
+
+.margin{
+  margin-bottom: 30px;
+}
+
+.margin-bro{
+  margin-top: -10px;
 }
