@@ -107,12 +107,3 @@ const NewTodo = () => {
 
 export default NewTodo;
 
-/**
- *
- * 1. redirect link for "Title"
- * 2. Remove the dark blue color
- * 3. Refactor the Add todos page such that
- *    - the error messsage must appear exactly below the input field and towards left side (aligned)
- *    - Adjust date and add button (space-between property)
- * 4.
- */
