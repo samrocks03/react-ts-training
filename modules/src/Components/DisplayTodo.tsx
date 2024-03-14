@@ -9,15 +9,15 @@ import { API_ENDPOINT } from "../constants";
 import TodoFilterBar from "./FilterBar/FilterBar";
 
 const DisplayTodo = () => {
-  const [isCompleted, setisCompleted] = useState<string>('all');
-  const { loading, error, data,refetchData } = useFetch();
+  const [isCompleted, setisCompleted] = useState<string>("all");
+  const { data, error, isLoading, refetch } = useFetch();
   const [tasks, setTasks] = useState<Todo[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    if(data){
-      setTasks(data);
+    if (data) {
+      setTasks(data.data); // Extract the 'data' property from the AxiosResponse object
     }
   }, [data]);
 
@@ -29,7 +29,7 @@ const DisplayTodo = () => {
     await fetch(`${API_ENDPOINT}/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-    }).then(() => refetchData());
+    }).then(() => refetch());
   };
 
   // ----------------------------- Toggle Check ----------------------------
@@ -43,7 +43,7 @@ const DisplayTodo = () => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ completed: checked }),
-    }).then(() => refetchData());
+    }).then(() => refetch());
   };
 
   const onSearchChange = (value: string) => {
@@ -54,38 +54,40 @@ const DisplayTodo = () => {
     setSortOrder(order);
   };
 
-  const onStatusChange = (checked:string) => {
-    console.log(checked)
+  const onStatusChange = (checked: string) => {
+    console.log(checked);
     setisCompleted(checked);
-  };  
+  };
 
-
-  console.log("tasks",tasks)
+  console.log("tasks", tasks);
 
   const filteredTasks = tasks
-  .filter((task) =>
-    task.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  .sort((a, b) => {
-    const dateA = a.date || ""; // Use an empty string if date is undefined
-    const dateB = b.date || ""; // Use an empty string if date is undefined
+    .filter((task) =>
+      task.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      const dateA = a.date || ""; // Use an empty string if date is undefined
+      const dateB = b.date || ""; // Use an empty string if date is undefined
 
-    return sortOrder === "asc" ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
-  });
+      return sortOrder === "asc"
+        ? dateA.localeCompare(dateB)
+        : dateB.localeCompare(dateA);
+    });
 
-  console.log("filteredTasks",filteredTasks)
+  console.log("filteredTasks", filteredTasks);
 
-  const dataFilteredByIsComplte = isCompleted === 'all' ? filteredTasks : filteredTasks.filter((task) => String(task.completed) === isCompleted);
-console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
+  const dataFilteredByIsComplte =
+    isCompleted === "all"
+      ? filteredTasks
+      : filteredTasks.filter((task) => String(task.completed) === isCompleted);
+  console.log("dataFilteredByIsComplte", dataFilteredByIsComplte);
 
-
-
-  if(loading){
-    return  <p>Loading..</p>
+  if (isLoading) {
+    return <p>Loading..</p>;
   }
 
-  if(error){
-    return <p>{error}</p>
+  if (error) {
+    return <p>{String(error)}</p>;
   }
 
   return (
@@ -103,19 +105,16 @@ console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
         {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
       </button> */}
 
-      {
-        dataFilteredByIsComplte.map((task) => (
-          <Task
-            key={task.id}
-            taskData={task}
-            deleteTask={deleteTask}
-            toggleComplete={toggleComplete}
-          />
-        ))
-      }
+      {dataFilteredByIsComplte.map((task) => (
+        <Task
+          key={task.id}
+          taskData={task}
+          deleteTask={deleteTask}
+          toggleComplete={toggleComplete}
+        />
+      ))}
     </div>
   );
 };
 
 export default DisplayTodo;
-

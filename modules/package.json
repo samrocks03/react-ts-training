@@ -13,6 +13,7 @@
   "dependencies": {
     "@syncfusion/ej2-react-calendars": "^24.2.9",
     "@syncfusion/ej2-react-grids": "^24.2.9",
+    "@tanstack/react-query": "^5.28.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "clsx": "^2.1.0",
