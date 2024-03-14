@@ -3,12 +3,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import "../App.css";
-import {  useNavigate } from "react-router-dom";
-import { API_ENDPOINT } from "../constants";
+import { useNavigate } from "react-router-dom";
+// import { API_ENDPOINT } from "../constants";
 import "bootstrap/dist/css/bootstrap.css";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 import { Todo } from "./Home";
+import { usePostTodo } from "../Hooks/todo.hooks";
 
 const validationRules = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -18,6 +19,7 @@ const validationRules = yup.object().shape({
 
 const NewTodo = () => {
   const navigate = useNavigate();
+  const { mutate } = usePostTodo();
 
   type ValuesType = {
     title: string;
@@ -39,26 +41,25 @@ const NewTodo = () => {
     return `${year}-${month}-${day}`;
   };
 
-  const handleSubmit = async (
-    values: ValuesType,
-    // navigate: NavigateFunction
-  ) => {
+  const handleSubmit = async (values: ValuesType) => {
+    const payload: Todo = {
+      id: uuidv4(),
+      title: values.title,
+      description: values.description,
+      completed: false,
+      date: values.date,
+    };
     try {
-      const payload: Todo = {
-        id: uuidv4(),
-        title: values.title,
-        description: values.description,
-        completed: false,
-        date: values.date,
-      };
-      await fetch(`${API_ENDPOINT}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      await mutate(payload, {
+        onSuccess: () => {
+          navigate("/");
+        },
+        onError: (error) => {
+          console.error("Error adding todo:", error);
+        },
       });
-      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error("Error adding todo:", error);
     }
   };
 
@@ -67,7 +68,7 @@ const NewTodo = () => {
       <h1>ADD Todos</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={ handleSubmit}
+        onSubmit={handleSubmit}
         validationSchema={validationRules}
       >
         <Form>

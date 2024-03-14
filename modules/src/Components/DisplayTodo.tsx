@@ -1,11 +1,10 @@
 // Components/DisplayTodo.tsx
 import { useEffect, useState } from "react";
-import { useFetch } from "../Hooks/todo.hooks";
+import { useFetch, useDeleteTodo, usePatchCheckTodo } from "../Hooks/todo.hooks";
 import { Todo } from "./Home";
 
 import Task from "./Task";
 
-import { API_ENDPOINT } from "../constants";
 import TodoFilterBar from "./FilterBar/FilterBar";
 
 const DisplayTodo = () => {
@@ -15,35 +14,33 @@ const DisplayTodo = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
+  const { deleteTodo } = useDeleteTodo();
+  const {patchCheckTodo,isPatchSuccess} = usePatchCheckTodo()
+  // const { postTodo } = usePostTodo();
+
   useEffect(() => {
     if (data) {
-      setTasks(data.data); // Extract the 'data' property from the AxiosResponse object
+      setTasks(data.data); 
+      console.log("This is new data",data.data)// Extract the 'data' property from the AxiosResponse object
     }
   }, [data]);
 
-  // ---------------------------- Delete Task ----------------------------
-  const deleteTask = async (id: string) => {
-    // const filteredTasks = tasks.filter((task) => task.id !== id);
-    // setTasks(filteredTasks);
+  useEffect(()=>{
+    if(isPatchSuccess){
+      refetch
+    }
+  },[isPatchSuccess, refetch])
 
-    await fetch(`${API_ENDPOINT}/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    }).then(() => refetch());
+  // ---------------------------- Delete Task ----------------------------
+  const deleteTask =  (id: string) => {
+    deleteTodo(id);
   };
 
   // ----------------------------- Toggle Check ----------------------------
-  const toggleComplete = async (id: string, checked: boolean) => {
-    // // const updatedTasks = tasks.map((task) =>
-    // //   task.id === id ? { ...task, completed: checked } : task
-    // // );
-    // setTasks(updatedTasks);
 
-    await fetch(`${API_ENDPOINT}/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed: checked }),
-    }).then(() => refetch());
+  
+  const toggleComplete =  (id: string, checked: boolean) => {
+    patchCheckTodo({id,checked})
   };
 
   const onSearchChange = (value: string) => {
@@ -55,11 +52,11 @@ const DisplayTodo = () => {
   };
 
   const onStatusChange = (checked: string) => {
-    console.log(checked);
+    // console.log(checked);
     setisCompleted(checked);
   };
 
-  console.log("tasks", tasks);
+  // console.log("tasks", tasks);
 
   const filteredTasks = tasks
     .filter((task) =>
@@ -74,13 +71,13 @@ const DisplayTodo = () => {
         : dateB.localeCompare(dateA);
     });
 
-  console.log("filteredTasks", filteredTasks);
+  // console.log("filteredTasks", filteredTasks);
 
   const dataFilteredByIsComplte =
     isCompleted === "all"
       ? filteredTasks
       : filteredTasks.filter((task) => String(task.completed) === isCompleted);
-  console.log("dataFilteredByIsComplte", dataFilteredByIsComplte);
+  // console.log("dataFilteredByIsComplte", dataFilteredByIsComplte);
 
   if (isLoading) {
     return <p>Loading..</p>;
