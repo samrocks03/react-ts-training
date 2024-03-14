@@ -3,7 +3,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import "../App.css";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../constants";
 import "bootstrap/dist/css/bootstrap.css";
 import { v4 as uuidv4 } from "uuid";
@@ -41,7 +41,7 @@ const NewTodo = () => {
 
   const handleSubmit = async (
     values: ValuesType,
-    navigate: NavigateFunction
+    // navigate: NavigateFunction
   ) => {
     try {
       const payload: Todo = {
@@ -67,7 +67,7 @@ const NewTodo = () => {
       <h1>ADD Todos</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => handleSubmit(values, navigate)}
+        onSubmit={ handleSubmit}
         validationSchema={validationRules}
       >
         <Form>

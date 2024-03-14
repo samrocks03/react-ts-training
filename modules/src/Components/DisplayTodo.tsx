@@ -1,6 +1,6 @@
 // Components/DisplayTodo.tsx
 import { useEffect, useState } from "react";
-import { useFetch } from "../Hooks/UseFetch";
+import { useFetch } from "../Hooks/todo.hooks";
 import { Todo } from "./Home";
 
 import Task from "./Task";
