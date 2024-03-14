@@ -8,6 +8,7 @@ import { API_ENDPOINT } from "../constants";
 import "bootstrap/dist/css/bootstrap.css";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
+import { Todo } from "./Home";
 
 const validationRules = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -43,16 +44,17 @@ const NewTodo = () => {
     navigate: NavigateFunction
   ) => {
     try {
+      const payload: Todo = {
+        id: uuidv4(),
+        title: values.title,
+        description: values.description,
+        completed: false,
+        date: values.date,
+      };
       await fetch(`${API_ENDPOINT}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: uuidv4(),
-          title: values.title,
-          description: values.description,
-          date: values.date,
-          completed: false,
-        }),
+        body: JSON.stringify(payload),
       });
       navigate("/");
     } catch (error) {
@@ -78,7 +80,7 @@ const NewTodo = () => {
 
           <Field as="textarea" name="description" placeholder="Description" />
           <ErrorMessage
-            className="margin  d-flex align-items-left"
+            className="margin d-flex align-items-left"
             name="description"
             component="div"
           />
@@ -106,4 +108,3 @@ const NewTodo = () => {
 };
 
 export default NewTodo;
-
