@@ -19,14 +19,14 @@
       "title": "Read book",
       "description": "Read the new novel you bought last week.",
       "date": "2023-03-14",
-      "completed": true
+      "completed": false
     },
     {
       "id": "8",
       "title": "Write report",
       "description": "Write a report on the project progress for the manager.",
       "date": "2023-03-05",
-      "completed": true
+      "completed": false
     },
     {
       "id": "be3e18b7-7fa9-418d-8809-d8e628ef5ec9",
@@ -40,14 +40,14 @@
       "title": "This is titl",
       "description": "DFKslkladf",
       "date": "2024-03-14",
-      "completed": false
+      "completed": true
     },
     {
       "id": "118b4240-7e59-4a87-bd57-3d9089064a05",
       "title": "Buy a task to",
       "description": "fsakjdfskl",
       "date": "2024-03-12",
-      "completed": false
+      "completed": true
     }
   ]
 }
