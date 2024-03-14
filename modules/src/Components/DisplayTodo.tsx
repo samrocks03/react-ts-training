@@ -55,12 +55,12 @@ const DisplayTodo = () => {
   };
 
   const onStatusChange = (checked:string) => {
-    console.log(checked)
+    // console.log(checked)
     setisCompleted(checked);
   };  
 
 
-  console.log("tasks",tasks)
+  // console.log("tasks",tasks)
 
   const filteredTasks = tasks
   .filter((task) =>
@@ -73,10 +73,10 @@ const DisplayTodo = () => {
     return sortOrder === "asc" ? dateA.localeCompare(dateB) : dateB.localeCompare(dateA);
   });
 
-  console.log("filteredTasks",filteredTasks)
+  // console.log("filteredTasks",filteredTasks)
 
   const dataFilteredByIsComplte = isCompleted === 'all' ? filteredTasks : filteredTasks.filter((task) => String(task.completed) === isCompleted);
-console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
+// console.log("dataFilteredByIsComplte",dataFilteredByIsComplte)
 
 
 
