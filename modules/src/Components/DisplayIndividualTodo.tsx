@@ -1,33 +1,63 @@
 // Components/DisplayIndividualTodo.tsx
-import { useEffect, useState } from "react";
+
+import { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { API_ENDPOINT } from "../constants";
+import {
+  DisplayIndividualTodoAction,
+  DisplayIndividualState,
+} from "../actions/Actions";
 
-// fetch and display a specific todo item based on an ID passed in URL parameters
+const initialState: DisplayIndividualState = {
+  title: "",
+  description: "",
+  completed: false,
+  date: undefined,
+};
+
+const reducer = (
+  state: DisplayIndividualState,
+  action: DisplayIndividualTodoAction
+): DisplayIndividualState => {
+  switch (action.type) {
+    case "SET_TITLE":
+      return { ...state, title: action.payload };
+    case "SET_DESCRIPTION":
+      return { ...state, description: action.payload };
+    case "SET_COMPLETED":
+      return { ...state, completed: action.payload };
+    case "SET_DATE":
+      return { ...state, date: action.payload };
+    default:
+      return state;
+  }
+};
+
 const DisplayIndividualTodo = () => {
   const param = useParams();
-
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [, setCompleted] = useState<boolean>(false);
-  const [date, setDate] = useState<string>();
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${API_ENDPOINT}/${param.id}`);
-
-      if (!response.ok) {
-        throw new Error("Something went wrong");
+      try {
+        const response = await fetch(`${API_ENDPOINT}/${param.id}`);
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        const data = await response.json();
+        dispatch({ type: "SET_TITLE", payload: data.title });
+        dispatch({ type: "SET_DESCRIPTION", payload: data.description });
+        dispatch({ type: "SET_COMPLETED", payload: data.completed });
+        dispatch({ type: "SET_DATE", payload: data.date });
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-      const data = await response.json();
-      setTitle(data.title);
-      setDescription(data.description);
-      setCompleted(data.completed);
-      setDate(data.date);
     };
-
     fetchData();
   }, [param.id]);
+
+  const { title, description, date } = state;
+
   return (
     <div>
       <h1>{title}</h1>
