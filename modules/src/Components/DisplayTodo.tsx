@@ -24,7 +24,7 @@ const DisplayTodo = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-  const { deleteTodo } = useDeleteTodo();
+  const { deleteTodo, isdeleteSuccess } = useDeleteTodo();
   const { patchCheckTodo, isPatchSuccess } = usePatchCheckTodo();
   // const { postTodo } = usePostTodo();
 
@@ -42,10 +42,17 @@ const DisplayTodo = () => {
   };
 
   useEffect(() => {
-    if (isPatchSuccess) {
+    if (isPatchSuccess || isdeleteSuccess) {
       refetchTodos();
+      /**
+       * If the network is slow, 
+       * and we press the checked button multiple times ( or some similar scenario)
+       * 
+       * Make sure to add a Loader or disable the checked button, 
+       * to ensure user doesn't press the button multiple times
+       */
     }
-  }, [isPatchSuccess, refetchTodos]);
+  }, [isPatchSuccess, isdeleteSuccess, refetchTodos]);
 
   // ---------------------------- Delete Task ----------------------------
   const deleteTask = (id: string) => {
@@ -112,35 +119,6 @@ const DisplayTodo = () => {
         isCompleted={isCompleted}
         onStatusChange={onStatusChange}
       />
-      <div>
-        <button className="btn btn-primary"
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1}
-        >
-          Previous
-        </button>
-
-        {page} of {totalpages}
-        
-        <button className="btn btn-primary ms-2"
-          onClick={() => handlePageChange(page + 1)}
-          disabled={page === totalpages}
-        >
-          Next
-        </button>
-
-        <br />
-        <input
-          className="mt-3 w-20"
-          type="number"
-          placeholder="set limit"
-          value={limit}
-          onChange={(e) => {
-            setLimit(parseInt(e.target.value));
-            setPage(1);
-          }}
-        />
-      </div>
 
       {/* <button className="rounded" onClick={() => setisCompleted(!isCompleted)}>
         {isCompleted ? "All  Tasks" : "Show Completed Tasks"}
@@ -154,6 +132,38 @@ const DisplayTodo = () => {
           toggleComplete={toggleComplete}
         />
       ))}
+
+      {
+        Boolean(dataFilteredByIsComplte.length) && <div>
+          <button
+            className="btn btn-primary"
+            onClick={() => handlePageChange(page - 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+          {page} of {totalpages}
+          <button
+            className="btn btn-primary ms-2"
+            onClick={() => handlePageChange(page + 1)}
+            disabled={page === totalpages}
+          >
+            Next
+          </button>
+          <div>
+            <input
+              className="mt-3 w-20"
+              type="number"
+              placeholder="set limit"
+              value={limit}
+              onChange={(e) => {
+                setLimit(parseInt(e.target.value));
+                setPage(1);
+              }}
+            />
+          </div>
+        </div>
+      }
     </div>
   );
 };

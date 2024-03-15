@@ -43,13 +43,13 @@ export const usePostTodo = () => {
 
 //  delete action
 export const useDeleteTodo = () => {
-  const { refetchTodos } = useFetch({ _page: 1, _limit: 5 })
+  // const { refetchTodos } = useFetch({ _page: 1, _limit: 5 })
   const { mutate, isSuccess, isPending } = useMutation({
     mutationFn: (id: string) => {
       return axios.delete(`${API_ENDPOINT}/${id}`)
     },
     onSuccess: () => {
-      refetchTodos()
+      // refetchTodos()
     },
   })
   return { deleteTodo: mutate, isdeleteSuccess: isSuccess, isDeletePending: isPending }

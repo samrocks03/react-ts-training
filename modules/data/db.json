@@ -1,53 +1,11 @@
 {
   "todos": [
     {
-      "id": "5",
-      "title": "Call mom",
-      "description": "Call mom to wish her a happy birthday.",
-      "date": "2023-03-15",
-      "completed": true
-    },
-    {
-      "id": "c84472e5-de1b-4a7c-9366-b01b58cd692a",
-      "title": "afsdkjsdfaklj",
-      "description": "dfsaflkjsdaglkjagslkg",
-      "completed": false,
-      "date": "2024-03-24"
-    },
-    {
-      "id": "9",
-      "title": "Go grocery shopping",
-      "description": "Buy vegetables, fruits, and milk.",
-      "date": "2024-03-16",
-      "completed": true
-    },
-    {
-      "id": "10",
-      "title": "Attend meeting",
-      "description": "Attend the team meeting at 10:00 AM.",
-      "date": "2024-03-17",
-      "completed": false
-    },
-    {
-      "id": "11",
-      "title": "Prepare presentation",
-      "description": "Prepare slides for the upcoming presentation.",
-      "date": "2024-03-20",
-      "completed": false
-    },
-    {
-      "id": "5bea521a-42cf-4baa-82d7-24000a46f0a9",
-      "title": "This is add todooooooooooooooooooooooooooooooooooooooooooo",
-      "description": "This is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnn",
-      "completed": false,
-      "date": "2024-03-17"
-    },
-    {
-      "id": "08369c5f-d2a1-46af-820a-70d762162087",
-      "title": "This is new Todo ",
-      "description": "This is also the description of new todo",
-      "completed": false,
-      "date": "2025-02-27"
+      "id": "57b8419d-2ff1-49b6-a2bc-da591c7d1eec",
+      "title": "todo",
+      "description": "todo",
+      "completed": true,
+      "date": "2024-03-21"
     }
   ]
 }
