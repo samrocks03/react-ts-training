@@ -134,7 +134,8 @@ const DisplayTodo = () => {
       ))}
 
       {
-        Boolean(dataFilteredByIsComplte.length) && <div>
+        Boolean(dataFilteredByIsComplte.length) && 
+        <div>
           <button
             className="btn btn-primary"
             onClick={() => handlePageChange(page - 1)}
