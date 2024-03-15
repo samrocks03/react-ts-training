@@ -31,9 +31,9 @@ const DisplayTodo = () => {
   useEffect(() => {
     if (todoListData) {
       setTasks(todoListData.data);
-      console.log("Header", todoListData.headers["x-total-count"]);
+      // console.log("Header", todoListData.headers["x-total-count"]);
       setTotalPages(Math.ceil(todoListData.headers["x-total-count"] / limit));
-      console.log("This is new data", todoListData.data); // Extract the 'data' property from the AxiosResponse object
+      // console.log("This is new data", todoListData.data); // Extract the 'data' property from the AxiosResponse object
     }
   }, [limit, todoListData]);
 
