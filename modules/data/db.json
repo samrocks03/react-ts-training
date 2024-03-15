@@ -41,6 +41,13 @@
       "description": "This is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnn",
       "completed": false,
       "date": "2024-03-17"
+    },
+    {
+      "id": "08369c5f-d2a1-46af-820a-70d762162087",
+      "title": "This is new Todo ",
+      "description": "This is also the description of new todo",
+      "completed": false,
+      "date": "2025-02-27"
     }
   ]
 }
