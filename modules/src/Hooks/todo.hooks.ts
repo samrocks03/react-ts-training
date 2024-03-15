@@ -10,16 +10,22 @@ interface PatchTodoRequest {
   checked: boolean
 }
 
+interface GetTodoRequest {
+  _page: number;
+  _limit: number;
+}
 // Get QueryClient from the context
 
-
-export const useFetch = () => {
-  const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['todos'],
-    queryFn: async () => await axios.get<Todo[]>(`${API_ENDPOINT}`)
+// Get - api
+export const useFetch = (params: GetTodoRequest) => {
+  // console.log(params)
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['todos', params],
+    queryFn: () => axios.get<Todo[]>(`${API_ENDPOINT}`, { params }).then((res) => res),
+    // keepPreviousData:true
   })
 
-  return { data, error, isLoading, refetch }
+  return { todoListData: data, isTodoListLoading: isLoading, isFetchError: error, refetchTodos: refetch }
 };
 
 
@@ -37,19 +43,24 @@ export const usePostTodo = () => {
 
 //  delete action
 export const useDeleteTodo = () => {
+  const { refetchTodos } = useFetch({ _page: 1, _limit: 5 })
   const { mutate, isSuccess, isPending } = useMutation({
     mutationFn: (id: string) => {
       return axios.delete(`${API_ENDPOINT}/${id}`)
-    }
+    },
+    onSuccess: () => {
+      refetchTodos()
+    },
   })
   return { deleteTodo: mutate, isdeleteSuccess: isSuccess, isDeletePending: isPending }
 }
 
 
- // patch action for check 
+// patch action for check 
 export const usePatchCheckTodo = () => {
   // const queryClient = useQueryClient()
-  const { mutate, isSuccess, isPending, } = useMutation({
+
+  const { mutate, isSuccess, isPending } = useMutation({
     mutationFn: ({ id, checked }: PatchTodoRequest) => {
       return axios.patch(`${API_ENDPOINT}/${id}`, { completed: checked });
     },

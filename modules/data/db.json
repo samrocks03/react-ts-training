@@ -8,20 +8,6 @@
       "completed": true
     },
     {
-      "id": "7",
-      "title": "Read book",
-      "description": "Read the new novel you bought last week.",
-      "date": "2023-03-14",
-      "completed": false
-    },
-    {
-      "id": "8",
-      "title": "Write report",
-      "description": "Write a report on the project progress for the manager.",
-      "date": "2023-03-05",
-      "completed": true
-    },
-    {
       "id": "c84472e5-de1b-4a7c-9366-b01b58cd692a",
       "title": "afsdkjsdfaklj",
       "description": "dfsaflkjsdaglkjagslkg",
@@ -33,7 +19,7 @@
       "title": "Go grocery shopping",
       "description": "Buy vegetables, fruits, and milk.",
       "date": "2024-03-16",
-      "completed": false
+      "completed": true
     },
     {
       "id": "10",
@@ -48,6 +34,13 @@
       "description": "Prepare slides for the upcoming presentation.",
       "date": "2024-03-20",
       "completed": false
+    },
+    {
+      "id": "5bea521a-42cf-4baa-82d7-24000a46f0a9",
+      "title": "This is add todooooooooooooooooooooooooooooooooooooooooooo",
+      "description": "This is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnn",
+      "completed": false,
+      "date": "2024-03-17"
     }
   ]
 }
