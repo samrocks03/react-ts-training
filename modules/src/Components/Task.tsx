@@ -11,7 +11,7 @@ interface TaskProps {
 
 const Task = ({ taskData, deleteTask, toggleComplete }: TaskProps) => {
   const navigate = useNavigate();
-  const { completed, description, title, id } = taskData;
+  const { completed, description, title, id ,date} = taskData;
   return (
     <div className={`task ${completed ? "completed" : ""}`}>
       <div
@@ -20,8 +20,11 @@ const Task = ({ taskData, deleteTask, toggleComplete }: TaskProps) => {
           navigate(`/display/${id}`);
         }}
       >
-        <p className={completed ? "completed-text" : ""}>{title}</p>
-        <span className={completed ? "completed-text" : ""}>{description}</span>
+       <div className="d-flex justify-content-between">
+       <p className={completed ? "completed-text" : ""}>{title}</p> 
+       <p>Due Date: {date}</p>
+       </div>
+        <span>{description}</span>
       </div>
 
       <input

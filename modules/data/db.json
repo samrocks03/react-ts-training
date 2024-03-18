@@ -1,52 +1,32 @@
 {
   "todos": [
     {
-      "id": "1",
-      "title": "Complete React project",
-      "description": "Finish the React project by implementing all the required features.",
-      "completed": false
+      "id": "57b8419d-2ff1-49b6-a2bc-da591c7d1eec",
+      "title": "todo",
+      "description": "todo",
+      "completed": true,
+      "date": "2024-03-21"
     },
     {
-      "id": "2",
-      "title": "Study for exam",
-      "description": "Study for the upcoming exam on React programming.",
-      "completed": false
+      "id": "7fef546a-f5e5-4972-8ef2-7ffea4e3e7b7",
+      "title": "fsdakjlsdfaj",
+      "description": "fdslkjdsgalkjg",
+      "completed": true,
+      "date": "2024-03-23"
     },
     {
-      "id": "3",
-      "title": "Exercise",
-      "description": "Go for a jog in the park.",
-      "completed": true
+      "id": "b7840bc2-b57f-47ec-a2f3-f0902b236e9a",
+      "title": "Helo",
+      "description": "THis is description",
+      "completed": true,
+      "date": "2026-02-27"
     },
     {
-      "id": "4",
-      "title": "Buy groceries",
-      "description": "Buy milk, eggs, bread, and fruits from the supermarket.",
-      "completed": false
-    },
-    {
-      "id": "5",
-      "title": "Call mom",
-      "description": "Call mom to wish her a happy birthday.",
-      "completed": true
-    },
-    {
-      "id": "6",
-      "title": "Attend meeting",
-      "description": "Attend the weekly team meeting at 10 AM.",
-      "completed": false
-    },
-    {
-      "id": "7",
-      "title": "Read book",
-      "description": "Read the new novel you bought last week.",
-      "completed": false
-    },
-    {
-      "id": "8",
-      "title": "Write report",
-      "description": "Write a report on the project progress for the manager.",
-      "completed": true
+      "id": "42e7d875-4bad-4846-9ca4-038e1feeffce",
+      "title": "todooooooooooooooooo",
+      "description": "fsakjl",
+      "completed": false,
+      "date": "2024-03-23"
     }
   ]
 }
